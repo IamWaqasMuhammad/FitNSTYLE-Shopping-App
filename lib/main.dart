@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shopping_app/feature/splash/view/splash_view.dart';
+import 'package:shopping_app/core/initial_binding/initial_binding.dart';
+import 'package:shopping_app/core/utils/routes/app_pages.dart';
+import 'package:shopping_app/core/utils/routes/app_routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -20,11 +23,9 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'FitNSTYLE',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const SplashView(),
+          initialBinding: InitialBinding(),
+          initialRoute: AppRoutes.splash,
+          getPages: AppPages.pages,
         );
       },
     );
