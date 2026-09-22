@@ -2,6 +2,7 @@ class AppIconsAssets {
 
   static const String basePath = 'assets/icons';
 
-  static const String appLogo = '$basePath/app_logo.png';
+  static const String appIcon = '$basePath/app_icon.png';
+  static const String googleIcon = '$basePath/google_icon.png';
 
 }

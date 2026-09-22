@@ -13,6 +13,7 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SplashController splashController = Get.put(SplashController());
+
     return Scaffold(
       backgroundColor: AppColors.surface,
       body: Column(
@@ -21,7 +22,7 @@ class SplashView extends StatelessWidget {
         children: [
           Center(
             child: Image(
-              image: AssetImage(AppIconsAssets.appLogo),
+              image: AssetImage(AppIconsAssets.appIcon),
               height: 200.h,
               width: 200.w,
             ),
@@ -33,6 +34,7 @@ class SplashView extends StatelessWidget {
           CircularProgressIndicator(
             strokeWidth: 3,
             color: AppColors.primary,
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
           )
         ],
       ),
