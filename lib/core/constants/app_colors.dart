@@ -73,4 +73,5 @@ class AppColors {
   // ================================
 
   static const Color overlay = Color(0x66000000);
+
 }
