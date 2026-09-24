@@ -12,7 +12,7 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SplashController splashController = Get.put(SplashController());
+    final SplashController splashController = Get.find<SplashController>();
 
     return Scaffold(
       backgroundColor: AppColors.surface,
