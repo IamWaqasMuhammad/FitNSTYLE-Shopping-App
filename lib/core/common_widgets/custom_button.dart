@@ -5,19 +5,25 @@ import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 
 class CustomButton extends StatelessWidget {
-  final String? text; // Optional kiya takay icon-only/image-only chal sakay
+  final String? text;
   final VoidCallback onTap;
+
   final Color? backgroundColor;
   final Color? textColor;
+
+  final Color? borderColor;
+  final double borderWidth;
+
   final double? width;
   final double? height;
   final double? borderRadius;
-  final bool isLoading;
 
-  // Naye flex capabilities 👇
-  final Widget? icon;         // Kisi bhi Flutter Icon widget k liye (e.g., Icon(Icons.add))
-  final Widget? image;        // Local/Network images ya SVG vectors k liye (e.g., Image.asset('path'))
-  final bool isSecondary;     // Quick toggle for borders/transparent look
+  final bool isLoading;
+  final bool isSecondary;
+  final bool isOutlined;
+
+  final Widget? icon;
+  final Widget? image;
 
   const CustomButton({
     super.key,
@@ -25,52 +31,90 @@ class CustomButton extends StatelessWidget {
     this.text,
     this.backgroundColor,
     this.textColor,
+    this.borderColor,
+    this.borderWidth = 1.5,
     this.width,
     this.height,
     this.borderRadius,
     this.isLoading = false,
+    this.isSecondary = false,
+    this.isOutlined = false,
     this.icon,
     this.image,
-    this.isSecondary = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Styling configurations based on primary/secondary properties
-    final double defaultHeight = height ?? 52.h;
-    final double defaultRadius = borderRadius ?? 12.r;
+    final double buttonHeight = height ?? 52.h;
+    final double radius = borderRadius ?? 12.r;
 
-    Color buttonBgColor = backgroundColor ?? (isSecondary ? Colors.transparent : AppColors.primary);
-    Color buttonTextColor = textColor ?? (isSecondary ? AppColors.textPrimary : AppColors.white);
-    Color rippleColor = isSecondary ? AppColors.textSecondary.withOpacity(0.1) : AppColors.white.withOpacity(0.2);
+    final bool hasText = text != null && text!.isNotEmpty;
+    final bool hasIcon = icon != null;
+    final bool hasImage = image != null;
 
-    // If it's icon/image only (No text provided), make it square by default if width isn't explicitly set
-    final bool isContentOnly = text == null;
-    final double? calculatedWidth = width ?? (isContentOnly ? defaultHeight : double.infinity);
+    final bool isContentOnly = !hasText;
 
-    return Container(
-      width: calculatedWidth,
-      height: defaultHeight,
-      decoration: BoxDecoration(
-        color: buttonBgColor,
-        borderRadius: BorderRadius.circular(defaultRadius),
-        border: isSecondary ? Border.all(color: AppColors.primary, width: 2) : null,
-        boxShadow: (!isSecondary && buttonBgColor != Colors.transparent)
-            ? [
-          BoxShadow(
-            color: buttonBgColor.withValues(alpha: 0.15),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ]
-            : null,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(defaultRadius),
+    final double buttonWidth =
+        width ?? (isContentOnly ? buttonHeight : double.infinity);
+
+    // Outlined button ka background transparent hoga
+    final Color buttonBackground = isOutlined
+        ? Colors.transparent
+        : backgroundColor ??
+        (isSecondary
+            ? Colors.transparent
+            : AppColors.primary);
+
+    final Color buttonText = textColor ??
+        (isOutlined || isSecondary
+            ? AppColors.primary
+            : AppColors.white);
+
+    final Color buttonBorder =
+        borderColor ?? AppColors.primary;
+
+    final Color splashColor = isOutlined || isSecondary
+        ? AppColors.primary.withValues(alpha: 0.12)
+        : AppColors.white.withValues(alpha: 0.20);
+
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(radius),
+      clipBehavior: Clip.antiAlias,
+      child: Ink(
+        width: buttonWidth,
+        height: buttonHeight,
+        decoration: BoxDecoration(
+          color: buttonBackground,
+          borderRadius: BorderRadius.circular(radius),
+
+          // Sirf isOutlined true hone par border
+          border: isOutlined
+              ? Border.all(
+            color: buttonBorder,
+            width: borderWidth,
+          )
+              : null,
+
+          boxShadow: (!isSecondary &&
+              !isOutlined &&
+              buttonBackground != Colors.transparent)
+              ? [
+            BoxShadow(
+              color: buttonBackground.withValues(
+                alpha: 0.15,
+              ),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ]
+              : null,
+        ),
         child: InkWell(
           onTap: isLoading ? null : onTap,
-          splashColor: rippleColor,
-          highlightColor: rippleColor.withOpacity(0.5),
+          splashColor: splashColor,
+          highlightColor: splashColor.withValues(alpha: 0.5),
+          splashFactory: InkRipple.splashFactory,
           child: Center(
             child: isLoading
                 ? SizedBox(
@@ -78,33 +122,35 @@ class CustomButton extends StatelessWidget {
               height: 24.w,
               child: CircularProgressIndicator(
                 strokeWidth: 2.5,
-                valueColor: AlwaysStoppedAnimation<Color>(buttonTextColor),
+                valueColor:
+                AlwaysStoppedAnimation<Color>(
+                  buttonText,
+                ),
               ),
             )
                 : Padding(
-              padding: EdgeInsets.symmetric(horizontal: isContentOnly ? 0 : 16.w),
+              padding: EdgeInsets.symmetric(
+                horizontal: hasText ? 16.w : 0,
+              ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // 1. Check for Image asset/network/svg vector
-                  if (image != null) ...[
+                  if (hasImage) ...[
                     image!,
-                    if (text != null) SizedBox(width: 8.w),
+                    if (hasText) SizedBox(width: 8.w),
                   ],
 
-                  // 2. Check for Standard Icon
-                  if (icon != null && image == null) ...[
+                  if (hasIcon && !hasImage) ...[
                     icon!,
-                    if (text != null) SizedBox(width: 8.w),
+                    if (hasText) SizedBox(width: 8.w),
                   ],
 
-                  // 3. Render Text if available
-                  if (text != null)
+                  if (hasText)
                     Text(
                       text!,
                       style: AppTextStyles.button.copyWith(
-                        color: buttonTextColor,
+                        color: buttonText,
                       ),
                     ),
                 ],

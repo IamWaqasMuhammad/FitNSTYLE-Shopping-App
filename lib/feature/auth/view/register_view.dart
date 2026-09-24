@@ -9,12 +9,14 @@ import 'package:shopping_app/core/constants/app_icons_assets.dart';
 import 'package:shopping_app/core/constants/app_sizes.dart';
 import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
+import 'package:shopping_app/feature/auth/controller/auth_controller.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AuthController());
     return Scaffold(
       backgroundColor: AppColors.surface,
       body: Padding(
@@ -79,23 +81,22 @@ class RegisterView extends StatelessWidget {
 
               // Login Redirect Text
               Center(
-                child: RichText(
-                  text: TextSpan(
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.textSecondary,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Already have an account?"),
+                    2.width,
+                    CustomButton(
+                      height: 28.h,
+                      width: 73.w,
+                      isSecondary: true,
+                      onTap: ()=> controller.gotoLoginScreen(),
+                      text: 'Login',
+                      textColor: AppColors.primary,
+                      backgroundColor: AppColors.surface,
                     ),
-                    children: [
-                      const TextSpan(text: "Already have an account? "),
-                      TextSpan(
-                        text: "Login",
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        recognizer: TapGestureRecognizer()..onTap = () => Get.back(),
-                      ),
-                    ],
-                  ),
+                  ],
                 ),
               ),
               40.height,
@@ -107,6 +108,7 @@ class RegisterView extends StatelessWidget {
                 text: 'Sign up with Google',
                 backgroundColor: Colors.transparent,
                 isSecondary: true,
+                isOutlined: true,
               ),
             ],
           ),

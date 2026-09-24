@@ -9,8 +9,8 @@ import 'package:shopping_app/core/constants/app_icons_assets.dart';
 import 'package:shopping_app/core/constants/app_sizes.dart';
 import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
+import 'package:shopping_app/feature/auth/controller/auth_controller.dart';
 
-import '../../../core/common_widgets/forget_password_bottom_sheet.dart';
 import '../../../core/utils/routes/app_routes.dart';
 
 class LoginView extends StatelessWidget {
@@ -18,6 +18,7 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AuthController());
     return Scaffold(
       backgroundColor: AppColors.surface,
       body: Padding(
@@ -48,16 +49,18 @@ class LoginView extends StatelessWidget {
                 suffixIcon: Icon(Icons.visibility_off),
                 prefixIcon: Icons.lock,
               ),
+              5.height,
               Align(
                 alignment: Alignment.centerRight,
                 child: CustomButton(
                   text: 'Forgot Password?',
-                  width: 170.w,
+                  width: 167.w,
                   height: 40.h,
                   backgroundColor: Colors.transparent,
                   textColor: AppColors.primary,
-                  isSecondary: false, // Prevents default secondary rectangular border lines from showing up
-                  onTap: () => openForgotPasswordSheet(), // Triggers Get.bottomSheet execution process loop
+                  isSecondary: true,
+                  onTap: () => controller
+                      .showForgetBottomSheet(), // Triggers Get.bottomSheet execution process loop
                 ),
               ),
 
@@ -65,33 +68,33 @@ class LoginView extends StatelessWidget {
               CustomButton(text: 'login', onTap: () {}),
               10.height,
               Center(
-                child: RichText(
-                  text: TextSpan(
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.textSecondary,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account?"),
+                    2.width,
+                    CustomButton(
+                      height: 28.h,
+                      width: 95.w,
+                      isSecondary: true,
+                      onTap: controller.gotoRegisterScreen,
+                      text: 'Register',
+                      textColor: AppColors.primary,
+                      backgroundColor: AppColors.surface,
                     ),
-                    children: [
-                      const TextSpan(text: "Don't have an account? "),
-                      TextSpan(
-                        text: "Register",
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        recognizer: TapGestureRecognizer()..onTap = () => Get.toNamed(AppRoutes.register),
-                      ),
-                    ],
-                  ),
+                  ],
                 ),
               ),
-
 
               40.height,
               CustomButton(
                 onTap: () {},
+                isOutlined: true,
                 image: Image.asset(AppIconsAssets.googleIcon, height: 28.h),
                 text: 'Continue with Google',
                 backgroundColor: Colors.transparent,
+
                 isSecondary: true,
 
               ),
