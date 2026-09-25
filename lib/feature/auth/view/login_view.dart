@@ -8,14 +8,14 @@ import 'package:shopping_app/core/constants/app_icons_assets.dart';
 import 'package:shopping_app/core/constants/app_sizes.dart';
 import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
-import 'package:shopping_app/feature/auth/controller/auth_controller.dart';
+import 'package:shopping_app/feature/auth/controller/login_controller.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<AuthController>();
+    final controller = Get.find<LoginController>();
 
     return Scaffold(
       backgroundColor: AppColors.surface,

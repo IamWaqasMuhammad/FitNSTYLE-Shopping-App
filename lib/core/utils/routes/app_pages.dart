@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:shopping_app/feature/auth/binding/login_binding.dart';
+import 'package:shopping_app/feature/auth/binding/register_binding.dart';
 import 'package:shopping_app/feature/auth/view/login_view.dart';
 import 'package:shopping_app/feature/auth/view/register_view.dart';
 import 'package:shopping_app/feature/dashboard/view/dashboard_view.dart';
@@ -12,8 +14,6 @@ import 'package:shopping_app/feature/profile/binding/profile_binding.dart';
 import 'package:shopping_app/feature/profile/view/profile_view.dart';
 import 'package:shopping_app/feature/splash/binding/splash_binding.dart';
 import 'package:shopping_app/feature/splash/view/splash_view.dart';
-
-import '../../../feature/auth/binding/auth_binding.dart';
 import '../../../feature/dashboard/binding/dashboard_binding.dart';
 import 'app_routes.dart';
 
@@ -30,13 +30,13 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => const LoginView(),
-      binding: AuthBinding(),
+      binding: LoginBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
       name: AppRoutes.register,
-      page: () => const RegisterView(),
-      binding: AuthBinding(),
+      page: () => RegisterView(),
+      binding: RegisterBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
