@@ -35,7 +35,7 @@ class NavbarItem extends StatelessWidget {
             child: Center(
               child: Icon(
                 icon,
-                size: 24.h,
+                size: isSelected? 30.h :24.h,
                 color: isSelected
                     ? AppColors.white
                     : AppColors.white.withValues(alpha: 0.55),

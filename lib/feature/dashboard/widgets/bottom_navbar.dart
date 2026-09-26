@@ -25,7 +25,7 @@ class CustomNavBar extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(AppSizes.md),
       child: Container(
         height: AppSizes.bottomNavHeight,
         width: double.infinity,
