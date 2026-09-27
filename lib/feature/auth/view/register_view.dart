@@ -96,7 +96,7 @@ class RegisterView extends StatelessWidget {
           label: 'Full Name',
           child: const CustomTextField(
             hintText: 'Waqas Dev',
-            prefixIcon: Icons.person_outline,
+            prefixIcon: Icon(Icons.person_outline),
             textInputAction: TextInputAction.next,
           ),
         ),
@@ -107,7 +107,7 @@ class RegisterView extends StatelessWidget {
           label: 'Email',
           child: const CustomTextField(
             hintText: 'waqasdev@gmail.com',
-            prefixIcon: Icons.email_outlined,
+            prefixIcon: Icon(Icons.email_outlined),
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
           ),
@@ -117,12 +117,28 @@ class RegisterView extends StatelessWidget {
 
         _buildField(
           label: 'Password',
-          child: const CustomTextField(
-            hintText: '*************',
-            prefixIcon: Icons.lock_outline,
-            suffixIcon: Icon(Icons.visibility_off),
-            isObscure: true,
-            textInputAction: TextInputAction.next,
+
+          // CHANGED: Obx added so password field rebuilds
+          child: Obx(
+                () => CustomTextField(
+              hintText: '*************',
+              prefixIcon: const Icon(Icons.lock_outline),
+
+              // CHANGED: Icon now changes according to password visibility
+              suffixIcon: IconButton(
+                onPressed: controller.togglePasswordVisibility,
+                icon: Icon(
+                  controller.isPasswordHidden.value
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                ),
+              ),
+
+              // CHANGED: Obscure value is now controlled by GetX
+              isObscure: controller.isPasswordHidden.value,
+
+              textInputAction: TextInputAction.next,
+            ),
           ),
         ),
 
@@ -130,12 +146,28 @@ class RegisterView extends StatelessWidget {
 
         _buildField(
           label: 'Confirm Password',
-          child: const CustomTextField(
-            hintText: '*************',
-            prefixIcon: Icons.lock_outline,
-            suffixIcon: Icon(Icons.visibility_off),
-            isObscure: true,
-            textInputAction: TextInputAction.done,
+
+          // CHANGED: Obx added for confirm-password visibility
+          child: Obx(
+                () => CustomTextField(
+              hintText: '*************',
+              prefixIcon: const Icon(Icons.lock_outline),
+
+              // CHANGED: Separate toggle for confirm password
+              suffixIcon: IconButton(
+                onPressed: controller.toggleConfirmPasswordVisibility,
+                icon: Icon(
+                  controller.isConfirmPasswordHidden.value
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                ),
+              ),
+
+              // CHANGED: Uses separate GetX state
+              isObscure: controller.isConfirmPasswordHidden.value,
+
+              textInputAction: TextInputAction.done,
+            ),
           ),
         ),
       ],

@@ -76,7 +76,7 @@ class ForgotPasswordSheet extends StatelessWidget {
               // Email Field
               const CustomTextField(
                 hintText: 'waqasdev@gmail.com',
-                prefixIcon: Icons.email_outlined,
+                prefixIcon: Icon(Icons.email_outlined),
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,
               ),

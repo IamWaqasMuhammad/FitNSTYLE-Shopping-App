@@ -8,7 +8,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String hintText;
   final String? labelText;
-  final IconData? prefixIcon;
+  final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool isObscure;
   final TextInputType keyboardType;
@@ -32,10 +32,12 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      cursorColor: AppColors.primary,
       obscureText: isObscure,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       validator: validator,
+
       // Input text style aapke app body styles se apply kiya hai
       style: AppTextStyles.bodyMedium,
       decoration: InputDecoration(
@@ -53,9 +55,7 @@ class CustomTextField extends StatelessWidget {
         ),
 
         // Icons profile colors map kiye hain
-        prefixIcon: prefixIcon != null
-            ? Icon(prefixIcon, size: 20.w, color: AppColors.textSecondary)
-            : null,
+        prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
 
         // Background container fill

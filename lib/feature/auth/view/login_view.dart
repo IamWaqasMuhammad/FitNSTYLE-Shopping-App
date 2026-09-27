@@ -40,7 +40,7 @@ class LoginView extends StatelessWidget {
                 CustomTextField(
                   controller: controller.emailController,
                   hintText: 'waqasdev@gmail.com',
-                  prefixIcon: Icons.person_outline,
+                  prefixIcon: Icon(Icons.person_outline),
                   keyboardType: TextInputType.emailAddress,
                 ),
                 20.height,
@@ -52,7 +52,7 @@ class LoginView extends StatelessWidget {
                     controller: controller.passwordController,
                     hintText: '*************',
                     isObscure: controller.isPasswordHidden.value,
-                    prefixIcon: Icons.lock_outline,
+                    prefixIcon: Icon(Icons.lock_outline),
                     suffixIcon: IconButton(
                       icon: Icon(
                         controller.isPasswordHidden.value
