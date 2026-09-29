@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shopping_app/core/common_widgets/custom_button.dart';
-import 'package:shopping_app/core/common_widgets/custom_grid_card.dart';
 import 'package:shopping_app/core/common_widgets/section_header.dart';
 import 'package:shopping_app/core/constants/app_colors.dart';
 import 'package:shopping_app/core/constants/app_icons_assets.dart';
 import 'package:shopping_app/core/constants/app_sizes.dart';
-import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
 import 'package:shopping_app/feature/home/controller/home_controller.dart';
 

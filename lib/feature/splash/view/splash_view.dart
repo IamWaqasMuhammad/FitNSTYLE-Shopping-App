@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:shopping_app/core/constants/app_colors.dart';
 import 'package:shopping_app/core/constants/app_icons_assets.dart';
 import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
-import 'package:shopping_app/feature/splash/controller/splash_controller.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final SplashController splashController = Get.find<SplashController>();
 
     return Scaffold(
       backgroundColor: AppColors.surface,

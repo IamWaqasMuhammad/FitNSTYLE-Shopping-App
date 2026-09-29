@@ -76,7 +76,7 @@ class HomeController extends GetxController {
   final List<Map<String, dynamic>> dummyProducts = [
     {
       'title': 'Classic Oversized Cotton T-Shirt',
-      'image': 'https://unsplash.com',
+      'image': 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab',
       'price': '\$29.99',
       'isFavorite': true,
     },
@@ -88,7 +88,7 @@ class HomeController extends GetxController {
     },
     {
       'title': 'Casual Linen Button-Down Shirt',
-      'image': 'https://unsplash.com',
+      'image': 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab',
       'price': '\$35.50',
       'isFavorite': false,
     },
@@ -118,7 +118,7 @@ class HomeController extends GetxController {
     },
     {
       'title': 'Classic Leather Strap Watch',
-      'image': 'https://unsplash.com',
+      'image': 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab',
       'price': '\$120.00',
       'isFavorite': false,
     },
