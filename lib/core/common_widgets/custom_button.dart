@@ -88,7 +88,6 @@ class CustomButton extends StatelessWidget {
           color: buttonBackground,
           borderRadius: BorderRadius.circular(radius),
 
-          // Sirf isOutlined true hone par border
           border: isOutlined
               ? Border.all(
             color: buttonBorder,

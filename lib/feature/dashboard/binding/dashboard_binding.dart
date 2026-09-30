@@ -13,7 +13,7 @@ class DashboardBinding extends Bindings {
 
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.lazyPut<NotificationsController>(() => NotificationsController(), fenix: true);
-    Get.lazyPut<OrdersController>(() => OrdersController(), fenix: true);
+    Get.lazyPut<OrderController>(() => OrderController(), fenix: true);
     Get.lazyPut<ProfileController>(() => ProfileController(), fenix: true);
   }
 }

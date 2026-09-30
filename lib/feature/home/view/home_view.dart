@@ -10,9 +10,11 @@ import 'package:shopping_app/core/constants/app_sizes.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
 import 'package:shopping_app/feature/home/controller/home_controller.dart';
 
+import '../../../core/common_widgets/custom_list_view.dart';
 import '../../../core/common_widgets/custom_popup_menu.dart';
 import '../../../core/common_widgets/custom_text_field.dart';
 import '../../../core/common_widgets/products_grid.dart';
+import '../../../core/utils/routes/app_routes.dart';
 import '../widgets/categories_item.dart';
 
 class HomeView extends StatelessWidget {
@@ -76,30 +78,35 @@ class HomeView extends StatelessWidget {
                 ),
                 keyboardType: TextInputType.text,
               ),
-              15.height,
-              SectionHeader(title: 'Categories', onSeeAllTap: () {}),
+              25.height,
+              SectionHeader(title: 'Categories', onSeeAllTap: () {Get.toNamed(AppRoutes.category);debugPrint('Tapped');}),
               10.height,
               SizedBox(
                 height: 95.h,
-                child: ListView.separated(
+                child: CustomListView(
                   scrollDirection: Axis.horizontal,
-                  itemCount: controller.categories.length,
-                  separatorBuilder: (context, index) {
-                    return SizedBox(width: 16.w);
-                  },
+                  separatorHeight: 12.h,
+                  shrinkWrap: true,
+                  // CHANGED: Nested scroll conflicts se bachne ke liye list ka scroll block kiya kyunki parent scroll view pehle se scrollable hai
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: controller.categories.length > 6?6:controller.categories.length,
                   itemBuilder: (context, index) {
                     final category = controller.categories[index];
+
+                    // 🟢 CHANGED: Expanded widget ko yahan se hata diya hai taake parent data assertion crash khatam ho jaye
                     return CategoryItem(
                       title: category['name']!,
                       image: category['image']!,
                       onTap: () {
-                        debugPrint('Selected: ${category['name']}');
+                        debugPrint(
+                          'Selected category: ${category['name']}',
+                        );
                       },
                     );
                   },
                 ),
               ),
-              15.height,
+              25.height,
               SectionHeader(title: 'Top Selling', onSeeAllTap: () {}),
               10.height,
 
@@ -110,17 +117,17 @@ class HomeView extends StatelessWidget {
                     : controller.dummyProducts.length,
                 onFavoriteTap: (index) {
                   final product = controller.dummyProducts[index];
-                  print('Toggled favorite for: ${product['title']}');
+                  debugPrint('Toggled favorite for: ${product['title']}');
                 },
                 onProductTap: (index) {
                   final product = controller.dummyProducts[index];
-                  print(
+                  debugPrint(
                     'Navigating to details page for: ${product['title']}',
                   );
                 },
               ),
 
-              15.height,
+              25.height,
               SectionHeader(
                 title: 'New In',
                 titleColor: AppColors.primary,
@@ -135,11 +142,11 @@ class HomeView extends StatelessWidget {
                     : controller.dummyProducts.length,
                 onFavoriteTap: (index) {
                   final product = controller.dummyProducts[index];
-                  print('Toggled favorite for: ${product['title']}');
+                  debugPrint('Toggled favorite for: ${product['title']}');
                 },
                 onProductTap: (index) {
                   final product = controller.dummyProducts[index];
-                  print(
+                  debugPrint(
                     'Navigating to details page for: ${product['title']}',
                   );
                 },

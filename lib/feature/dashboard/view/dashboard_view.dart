@@ -5,7 +5,7 @@ import 'package:shopping_app/feature/dashboard/controller/dashboard_controller.d
 import 'package:shopping_app/feature/dashboard/widgets/bottom_navbar.dart';
 import 'package:shopping_app/feature/home/view/home_view.dart';
 import 'package:shopping_app/feature/notifications/view/notifications_view.dart';
-import 'package:shopping_app/feature/orders/view/order_view.dart';
+import 'package:shopping_app/feature/orders/view/orders_view.dart';
 import 'package:shopping_app/feature/profile/view/profile_view.dart';
 
 class DashboardView extends StatelessWidget {

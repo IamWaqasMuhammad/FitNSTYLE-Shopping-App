@@ -33,7 +33,7 @@ class SectionHeader extends StatelessWidget {
           ),
         ),
         CustomButton(
-          onTap: () {},
+          onTap: onSeeAllTap,
           text: buttonText,
           height: 30.h,
           width: 85.w,
