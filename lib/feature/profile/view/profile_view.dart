@@ -86,7 +86,7 @@ class ProfileView extends StatelessWidget {
                   children: [
                     10.height,
                     CustomListTile(
-                      height: 70.h,
+                      height: 50.h,
                       backgroundColor: AppColors.grey,
                       leadingIcon: Icon(CupertinoIcons.location),
                       text: 'Address',
@@ -94,7 +94,7 @@ class ProfileView extends StatelessWidget {
                     ),
                     10.height,
                     CustomListTile(
-                      height: 70.h,
+                      height: 50.h,
                       backgroundColor: AppColors.grey,
                       leadingIcon: Icon(CupertinoIcons.bell),
                       text: 'Notifications',
@@ -102,7 +102,7 @@ class ProfileView extends StatelessWidget {
                     ),
                     10.height,
                     CustomListTile(
-                      height: 70.h,
+                      height: 50.h,
                       backgroundColor: AppColors.grey,
                       leadingIcon: Icon(Icons.settings_outlined),
                       text: 'Settings',
@@ -110,7 +110,7 @@ class ProfileView extends StatelessWidget {
                     ),
                     10.height,
                     CustomListTile(
-                      height: 70.h,
+                      height: 50.h,
                       backgroundColor: AppColors.grey,
                       leadingIcon: Icon(CupertinoIcons.heart),
                       text: 'Wishlist',
@@ -118,7 +118,7 @@ class ProfileView extends StatelessWidget {
                     ),
                     10.height,
                     CustomListTile(
-                      height: 70.h,
+                      height: 50.h,
                       backgroundColor: AppColors.grey,
                       leadingIcon: Icon(CupertinoIcons.question_circle),
                       text: 'Help & Support',
@@ -126,7 +126,7 @@ class ProfileView extends StatelessWidget {
                     ),
                     10.height,
                     CustomListTile(
-                      height: 70.h,
+                      height: 50.h,
                       backgroundColor: AppColors.grey,
                       leadingIcon: Icon(CupertinoIcons.creditcard),
                       text: 'Payments',
