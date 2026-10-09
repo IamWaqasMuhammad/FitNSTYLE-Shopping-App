@@ -16,6 +16,7 @@ import 'package:shopping_app/feature/orders/view/orders_view.dart';
 import 'package:shopping_app/feature/orders/view/processing_orders_view.dart';
 import 'package:shopping_app/feature/orders/view/returned_orders_view.dart';
 import 'package:shopping_app/feature/orders/view/shippped_orders_view.dart';
+import 'package:shopping_app/feature/product/view/product_detail_view.dart';
 import 'package:shopping_app/feature/profile/binding/profile_binding.dart';
 import 'package:shopping_app/feature/profile/view/profile_view.dart';
 import 'package:shopping_app/feature/splash/binding/splash_binding.dart';
@@ -103,6 +104,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.cancelledOrders,
       page: () => const CancelledOrdersView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.productDetail,
+      page: () => const ProductDetailView(),
       transition: Transition.fadeIn,
     ),
   ];

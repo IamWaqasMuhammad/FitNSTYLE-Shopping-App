@@ -11,9 +11,10 @@ class AppRoutes {
   static const String orders = '/orders';
   static const String profile = '/profile';
   static const String category = '/category';
-  static const String processingOrders = '/processing_orders';
-  static const String shippedOrders = '/shipped_orders';
-  static const String deliveredOrders = '/delivered_orders';
-  static const String returnedOrders = '/returned_orders';
-  static const String cancelledOrders = '/cancelled_orders';
+  static const String processingOrders = '/processing-orders';
+  static const String shippedOrders = '/shipped-orders';
+  static const String deliveredOrders = '/delivered-orders';
+  static const String returnedOrders = '/returned-orders';
+  static const String cancelledOrders = '/cancelled-orders';
+  static const String productDetail = '/product-Detail';
 }

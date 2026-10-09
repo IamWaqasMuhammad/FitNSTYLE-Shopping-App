@@ -94,7 +94,11 @@ class CustomPopupMenu extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               selectedItem ?? label,
-              style: AppTextStyles.semiBold,
+              style: AppTextStyles.semiBold.copyWith(
+                color: selectedItem != null
+                    ? AppColors.primary
+                    : AppColors.textPrimary,
+              ),
             ),
           ),
 
@@ -108,6 +112,9 @@ class CustomPopupMenu extends StatelessWidget {
               child: Icon(
                 Icons.keyboard_arrow_down_rounded,
                 size: 20.sp,
+                color: selectedItem != null
+                    ? AppColors.primary
+                    : AppColors.textPrimary,
               ),
             ),
           ),

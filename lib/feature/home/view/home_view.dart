@@ -23,6 +23,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<HomeController>();
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: SafeArea(
@@ -31,6 +32,7 @@ class HomeView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // ==================== APP BAR SECTION ====================
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -51,7 +53,7 @@ class HomeView extends StatelessWidget {
                           label: controller.selectedMenuCategory.value,
                           items: controller.menuCategoryList,
                           selectedItem: controller.selectedMenuCategory.value,
-                          onSelected: controller.changeMenuCategory,
+                          onSelected: controller.changeMenu,
                         ),
                       ),
                     ),
@@ -70,6 +72,8 @@ class HomeView extends StatelessWidget {
                 ],
               ),
               25.height,
+
+              // ==================== SEARCH BAR SECTION ====================
               CustomTextField(
                 hintText: 'Search',
                 prefixIcon: Icon(
@@ -79,7 +83,14 @@ class HomeView extends StatelessWidget {
                 keyboardType: TextInputType.text,
               ),
               25.height,
-              SectionHeader(title: 'Categories', onSeeAllTap: () {Get.toNamed(AppRoutes.category);debugPrint('Tapped');}),
+
+              // ==================== CATEGORIES SECTION ====================
+              SectionHeader(
+                title: 'Categories',
+                onSeeAllTap: () {
+                  Get.toNamed(AppRoutes.category);
+                },
+              ),
               10.height,
               SizedBox(
                 height: 95.h,
@@ -87,47 +98,63 @@ class HomeView extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   separatorHeight: 12.h,
                   shrinkWrap: true,
-                  // CHANGED: Nested scroll conflicts se bachne ke liye list ka scroll block kiya kyunki parent scroll view pehle se scrollable hai
                   physics: const BouncingScrollPhysics(),
-                  itemCount: controller.categories.length > 6?6:controller.categories.length,
+                  itemCount: controller.categories.length > 6
+                      ? 6
+                      : controller.categories.length,
                   itemBuilder: (context, index) {
                     final category = controller.categories[index];
-
-                    // 🟢 CHANGED: Expanded widget ko yahan se hata diya hai taake parent data assertion crash khatam ho jaye
                     return CategoryItem(
                       title: category['name']!,
                       image: category['image']!,
                       onTap: () {
-                        debugPrint(
-                          'Selected category: ${category['name']}',
-                        );
+                        debugPrint('Selected category: ${category['name']}');
                       },
                     );
                   },
                 ),
               ),
               25.height,
+
+              // ==================== TOP SELLING (DYNAMIC FILTERED) ====================
               SectionHeader(title: 'Top Selling', onSeeAllTap: () {}),
               10.height,
 
-              ProductsGrid(
-                products: controller.dummyProducts,
-                maxItems: controller.dummyProducts.length > 2
-                    ? 2
-                    : controller.dummyProducts.length,
-                onFavoriteTap: (index) {
-                  final product = controller.dummyProducts[index];
-                  debugPrint('Toggled favorite for: ${product['title']}');
-                },
-                onProductTap: (index) {
-                  final product = controller.dummyProducts[index];
-                  debugPrint(
-                    'Navigating to details page for: ${product['title']}',
-                  );
-                },
-              ),
+              // 🟢 CHANGED: Wrapped with Obx to observe top menu filter selections in real-time
+              Obx(() {
+                // Filter strings match directly using lowercase references
+                final selectedTab = controller.selectedMenuCategory.value
+                    .toLowerCase();
+
+                // Filtering main list according to selection indicator
+                final filteredList = controller.dummyProducts
+                    .where(
+                      (p) =>
+                          p['genderCategory'].toString().toLowerCase() ==
+                          selectedTab,
+                    )
+                    .toList();
+
+                return ProductsGrid(
+                  products: filteredList,
+                  maxItems: 2,
+                  onFavoriteTap: (index) {
+                    debugPrint(
+                      'Toggled favorite for: ${filteredList[index]['title']}',
+                    );
+                  },
+                  onProductTap: (index) {
+                    Get.toNamed(
+                      AppRoutes.productDetail,
+                      arguments: filteredList[index],
+                    );
+                  },
+                );
+              }),
 
               25.height,
+
+              // ==================== NEW IN (DYNAMIC FILTERED) ====================
               SectionHeader(
                 title: 'New In',
                 titleColor: AppColors.primary,
@@ -135,22 +162,40 @@ class HomeView extends StatelessWidget {
                 onSeeAllTap: () {},
               ),
               10.height,
-              ProductsGrid(
-                products: controller.dummyProducts,
-                maxItems: controller.dummyProducts.length > 4
-                    ? 4
-                    : controller.dummyProducts.length,
-                onFavoriteTap: (index) {
-                  final product = controller.dummyProducts[index];
-                  debugPrint('Toggled favorite for: ${product['title']}');
-                },
-                onProductTap: (index) {
-                  final product = controller.dummyProducts[index];
-                  debugPrint(
-                    'Navigating to details page for: ${product['title']}',
-                  );
-                },
-              ),
+
+              // 🟢 CHANGED: Wrapped with Obx to dynamically update items layout
+              Obx(() {
+                final selectedTab = controller.selectedMenuCategory.value
+                    .toLowerCase();
+
+                // Reading identical lists filtering configurations
+                final filteredList = controller.dummyProducts
+                    .where(
+                      (p) =>
+                          p['genderCategory'].toString().toLowerCase() ==
+                          selectedTab,
+                    )
+                    .toList();
+
+                return ProductsGrid(
+                  // Show reverse array trends matching specific filter categories
+                  products: filteredList.reversed.toList(),
+                  maxItems: 4,
+                  onFavoriteTap: (index) {
+                    final reversedItem = filteredList.reversed.toList()[index];
+                    debugPrint(
+                      'Toggled favorite for: ${reversedItem['title']}',
+                    );
+                  },
+                  onProductTap: (index) {
+                    final reversedItem = filteredList.reversed.toList()[index];
+                    Get.toNamed(
+                      AppRoutes.productDetail,
+                      arguments: reversedItem,
+                    );
+                  },
+                );
+              }),
             ],
           ),
         ),

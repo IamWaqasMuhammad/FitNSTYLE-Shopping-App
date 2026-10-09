@@ -18,7 +18,6 @@ class ProductsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 🟢 CHANGED: Dynamic condition check for counting limits
     final int displayCount = maxItems != null && products.length > maxItems!
         ? maxItems!
         : products.length;
