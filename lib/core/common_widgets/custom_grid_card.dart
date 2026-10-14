@@ -12,8 +12,6 @@ class CustomGridCard extends StatelessWidget {
   final String image;
   final String title;
   final String price;
-  final bool isFavorite;
-  final VoidCallback onFavoriteTap;
   final VoidCallback onTap;
 
   const CustomGridCard({
@@ -26,8 +24,6 @@ class CustomGridCard extends StatelessWidget {
     required this.image,
     required this.title,
     required this.price,
-    this.isFavorite = false,
-    required this.onFavoriteTap,
     required this.onTap,
   });
 
@@ -65,27 +61,6 @@ class CustomGridCard extends StatelessWidget {
                           Icons.image_not_supported_outlined,
                           color: AppColors.textLight,
                           size: 24.sp,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  // Favorite Action Layout Configuration (Top Right Corner)
-                  Positioned(
-                    top: 8.h,
-                    right: 8.w,
-                    child: GestureDetector(
-                      onTap: onFavoriteTap,
-                      child: Container(
-                        padding: EdgeInsets.all(6.r),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          isFavorite ? Icons.favorite : Icons.favorite_border,
-                          color: isFavorite ? Colors.red : AppColors.textLight,
-                          size: 18.sp,
                         ),
                       ),
                     ),

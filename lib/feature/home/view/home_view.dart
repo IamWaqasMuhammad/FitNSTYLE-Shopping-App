@@ -138,11 +138,6 @@ class HomeView extends StatelessWidget {
                 return ProductsGrid(
                   products: filteredList,
                   maxItems: 2,
-                  onFavoriteTap: (index) {
-                    debugPrint(
-                      'Toggled favorite for: ${filteredList[index]['title']}',
-                    );
-                  },
                   onProductTap: (index) {
                     Get.toNamed(
                       AppRoutes.productDetail,
@@ -181,12 +176,6 @@ class HomeView extends StatelessWidget {
                   // Show reverse array trends matching specific filter categories
                   products: filteredList.reversed.toList(),
                   maxItems: 4,
-                  onFavoriteTap: (index) {
-                    final reversedItem = filteredList.reversed.toList()[index];
-                    debugPrint(
-                      'Toggled favorite for: ${reversedItem['title']}',
-                    );
-                  },
                   onProductTap: (index) {
                     final reversedItem = filteredList.reversed.toList()[index];
                     Get.toNamed(

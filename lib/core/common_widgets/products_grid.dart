@@ -5,14 +5,12 @@ import 'custom_grid_card.dart'; // Apna sahi path confirm kar lein
 class ProductsGrid extends StatelessWidget {
   final List<Map<String, dynamic>> products;
   final int? maxItems; // Optional parameter taake home par sirf 2 items dikhayein
-  final Function(int index) onFavoriteTap;
   final Function(int index) onProductTap;
 
   const ProductsGrid({
     super.key,
     required this.products,
-    this.maxItems, // Agar ye pass nahi karenge, toh saare products dikhega
-    required this.onFavoriteTap,
+    this.maxItems,
     required this.onProductTap,
   });
 
@@ -42,10 +40,7 @@ class ProductsGrid extends StatelessWidget {
         return CustomGridCard(
           image: product['image'] ?? '',
           title: product['title'] ?? '',
-          price: product['price'] ?? '',
-          isFavorite: product['isFavorite'] ?? false,
-          onFavoriteTap: () => onFavoriteTap(index),
-          onTap: () => onProductTap(index),
+          price: product['price'] ?? '',          onTap: () => onProductTap(index),
         );
       },
     );
