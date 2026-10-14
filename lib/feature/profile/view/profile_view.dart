@@ -65,6 +65,7 @@ class ProfileView extends StatelessWidget {
                     textColor: AppColors.black,
                     backgroundColor: Colors.transparent,
                     isSecondary: true,
+                    isOutlined: true,
                   ),
                 ],
               ),
