@@ -272,6 +272,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.7.3"
+  hive:
+    dependency: transitive
+    description:
+      name: hive
+      sha256: "8dcf6db979d7933da8217edcec84e9df1bdb4e4edc7fc77dbd5aa74356d6d941"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.3"
+  hive_flutter:
+    dependency: transitive
+    description:
+      name: hive_flutter
+      sha256: dca1da446b1d808a51689fb5d0c6c9510c0a2ba01e22805d492c73b68e33eecc
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   hooks:
     dependency: transitive
     description:
@@ -536,6 +552,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.2"
+  persistent_shopping_cart:
+    dependency: "direct main"
+    description:
+      name: persistent_shopping_cart
+      sha256: "70b74f92f469e448b6128b707ab36547f131e36193b473e59a126bbdc83b2ff4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
   platform:
     dependency: transitive
     description:

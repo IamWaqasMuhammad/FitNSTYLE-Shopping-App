@@ -3,6 +3,8 @@ import 'package:shopping_app/feature/auth/binding/login_binding.dart';
 import 'package:shopping_app/feature/auth/binding/register_binding.dart';
 import 'package:shopping_app/feature/auth/view/login_view.dart';
 import 'package:shopping_app/feature/auth/view/register_view.dart';
+import 'package:shopping_app/feature/cart/binding/shopping_cart_binding.dart';
+import 'package:shopping_app/feature/cart/view/shopping_cart_view.dart';
 import 'package:shopping_app/feature/home/view/category_view.dart';
 import 'package:shopping_app/feature/dashboard/view/dashboard_view.dart';
 import 'package:shopping_app/feature/home/binding/home_binding.dart';
@@ -109,6 +111,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.productDetail,
       page: () => const ProductDetailView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.shoppingCart,
+      page: () => const ShoppingCartView(),
+      binding: ShoppingCartBinding(),
       transition: Transition.fadeIn,
     ),
   ];

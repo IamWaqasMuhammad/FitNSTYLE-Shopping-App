@@ -59,7 +59,9 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                   CustomButton(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.shoppingCart);
+                    },
                     icon: Image.asset(
                       AppIconsAssets.shoppingBagIcon,
                       height: 20.h,
