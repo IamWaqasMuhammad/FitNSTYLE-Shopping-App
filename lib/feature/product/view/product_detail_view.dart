@@ -7,6 +7,7 @@ import 'package:shopping_app/core/constants/app_colors.dart';
 import 'package:shopping_app/core/constants/app_sizes.dart';
 import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
+import 'package:shopping_app/core/utils/routes/app_routes.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key});
@@ -166,7 +167,36 @@ class ProductDetailView extends StatelessWidget {
                       product['description'] ?? 'No Description available for this item.',
                       style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.5),
                     ),
-                    40.height,
+                    70.height,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomButton(
+                            text: 'Add to cart',
+                            icon: Icon(
+                              CupertinoIcons.cart,
+                              color: AppColors.white,
+                            ),
+                            onTap: () {Get.toNamed(AppRoutes.addToCart);},
+                            backgroundColor: AppColors.primary,
+                            textColor: AppColors.white,
+                          ),
+                        ),
+                        5.width,
+                        CustomButton(
+                          onTap: () {},
+                          text: 'Wishlist',
+                          width: 150.w,
+                          icon: Icon(
+                            CupertinoIcons.heart,
+                            color: AppColors.primary,
+                          ),
+                          isSecondary: true,
+                          isOutlined: true,
+                          borderRadius: AppSizes.radiusCircular,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

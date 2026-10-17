@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:shopping_app/feature/add_to_cart/binding/add_to_cart_binding.dart';
+import 'package:shopping_app/feature/add_to_cart/view/add_to_cart_view.dart';
 import 'package:shopping_app/feature/auth/binding/login_binding.dart';
 import 'package:shopping_app/feature/auth/binding/register_binding.dart';
 import 'package:shopping_app/feature/auth/view/login_view.dart';
@@ -117,6 +119,12 @@ class AppPages {
       name: AppRoutes.shoppingCart,
       page: () => const ShoppingCartView(),
       binding: ShoppingCartBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.addToCart,
+      page: () => const AddToCartView(),
+      binding: AddToCartBinding(),
       transition: Transition.fadeIn,
     ),
   ];
