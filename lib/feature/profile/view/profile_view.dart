@@ -81,7 +81,7 @@ class ProfileView extends StatelessWidget {
                   10.height,
                   CustomListTile(
                     height: 50.h,
-                    backgroundColor: AppColors.grey,
+                    backgroundColor: AppColors.lightGrey,
                     leadingIcon: Icon(CupertinoIcons.location),
                     text: 'Address',
                     trailingIcon: Icon(CupertinoIcons.arrow_right),
@@ -89,7 +89,7 @@ class ProfileView extends StatelessWidget {
                   10.height,
                   CustomListTile(
                     height: 50.h,
-                    backgroundColor: AppColors.grey,
+                    backgroundColor: AppColors.lightGrey,
                     leadingIcon: Icon(CupertinoIcons.bell),
                     text: 'Notifications',
                     trailingIcon: Icon(CupertinoIcons.arrow_right),
@@ -97,7 +97,7 @@ class ProfileView extends StatelessWidget {
                   10.height,
                   CustomListTile(
                     height: 50.h,
-                    backgroundColor: AppColors.grey,
+                    backgroundColor: AppColors.lightGrey,
                     leadingIcon: Icon(CupertinoIcons.heart),
                     text: 'Wishlist',
                     trailingIcon: Icon(CupertinoIcons.arrow_right),
@@ -105,7 +105,7 @@ class ProfileView extends StatelessWidget {
                   10.height,
                   CustomListTile(
                     height: 50.h,
-                    backgroundColor: AppColors.grey,
+                    backgroundColor: AppColors.lightGrey,
                     leadingIcon: Icon(CupertinoIcons.creditcard),
                     text: 'Payments',
                     trailingIcon: Icon(CupertinoIcons.arrow_right),
@@ -113,7 +113,7 @@ class ProfileView extends StatelessWidget {
                   10.height,
                   CustomListTile(
                     height: 50.h,
-                    backgroundColor: AppColors.grey,
+                    backgroundColor: AppColors.lightGrey,
                     leadingIcon: Icon(Icons.settings_outlined),
                     text: 'Settings',
                     trailingIcon: Icon(CupertinoIcons.arrow_right),
@@ -121,7 +121,7 @@ class ProfileView extends StatelessWidget {
                   10.height,
                   CustomListTile(
                     height: 50.h,
-                    backgroundColor: AppColors.grey,
+                    backgroundColor: AppColors.lightGrey,
                     leadingIcon: Icon(CupertinoIcons.question_circle),
                     text: 'Help & Support',
                     trailingIcon: Icon(CupertinoIcons.arrow_right),
