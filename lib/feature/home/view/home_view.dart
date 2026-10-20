@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shopping_app/core/common_widgets/custom_button.dart';
+import 'package:shopping_app/core/common_widgets/custom_search_bar.dart';
 import 'package:shopping_app/core/common_widgets/section_header.dart';
 import 'package:shopping_app/core/constants/app_colors.dart';
 import 'package:shopping_app/core/constants/app_icons_assets.dart';
@@ -12,7 +13,6 @@ import 'package:shopping_app/feature/home/controller/home_controller.dart';
 
 import '../../../core/common_widgets/custom_list_view.dart';
 import '../../../core/common_widgets/custom_popup_menu.dart';
-import '../../../core/common_widgets/custom_text_field.dart';
 import '../../../core/common_widgets/products_grid.dart';
 import '../../../core/utils/routes/app_routes.dart';
 import '../widgets/categories_item.dart';
@@ -76,13 +76,12 @@ class HomeView extends StatelessWidget {
               25.height,
 
               // ==================== SEARCH BAR SECTION ====================
-              CustomTextField(
+              CustomSearchBar(
                 hintText: 'Search',
                 prefixIcon: Icon(
                   CupertinoIcons.search,
                   color: AppColors.textLight,
                 ),
-                keyboardType: TextInputType.text,
               ),
               25.height,
 

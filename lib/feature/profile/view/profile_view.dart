@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:shopping_app/core/common_widgets/custom_button.dart';
 import 'package:shopping_app/core/common_widgets/custom_list_tile.dart';
 import 'package:shopping_app/core/constants/app_colors.dart';
 import 'package:shopping_app/core/constants/app_sizes.dart';
 import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
+import 'package:shopping_app/core/utils/routes/app_routes.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -59,8 +61,10 @@ class ProfileView extends StatelessWidget {
                       Text('0301-1234567', style: AppTextStyles.bodyMedium),
                     ],
                   ),
-                  CustomButton(onTap: () {}, text: 'Edit',
-                  height: 30.h,
+                  CustomButton(
+                    onTap: () {},
+                    text: 'Edit',
+                    height: 30.h,
                     width: 70.w,
                     textColor: AppColors.black,
                     backgroundColor: Colors.transparent,
@@ -101,13 +105,15 @@ class ProfileView extends StatelessWidget {
                     leadingIcon: Icon(CupertinoIcons.heart),
                     text: 'Wishlist',
                     trailingIcon: Icon(CupertinoIcons.arrow_right),
+                    // CHANGED: Open the saved-product grid from the profile.
+                    onTap: () => Get.toNamed(AppRoutes.wishlist),
                   ),
                   10.height,
                   CustomListTile(
                     height: 50.h,
                     backgroundColor: AppColors.lightGrey,
                     leadingIcon: Icon(CupertinoIcons.creditcard),
-                    text: 'Payments',
+                    text: 'Payment Methods',
                     trailingIcon: Icon(CupertinoIcons.arrow_right),
                   ),
                   10.height,
