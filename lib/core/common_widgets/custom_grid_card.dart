@@ -17,7 +17,7 @@ class CustomGridCard extends StatelessWidget {
   const CustomGridCard({
     super.key,
     this.height = 240, // standard grid card height optimized via ScreenUtil
-    this.width = 160,  // standard grid card width
+    this.width = 160, // standard grid card width
     this.bgColor = AppColors.lightGrey, // fallbacks configurations
     this.borderRadius,
     this.boxShadow,
@@ -45,15 +45,19 @@ class CustomGridCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ==================== TOP PART: IMAGE & FAV BUTTON ====================
+            // CHANGED: Cards open product details; cart actions stay on that screen.
+            // ==================== TOP PART: IMAGE ====================
             Expanded(
-              flex: 6, // Allocates 60% of card space to layout assets dynamically
+              flex:
+                  6, // Allocates 60% of card space to layout assets dynamically
               child: Stack(
                 children: [
                   // Product Image Asset Rendering
                   Positioned.fill(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(12.r),
+                      ),
                       child: Image.network(
                         image,
                         fit: BoxFit.cover,

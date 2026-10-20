@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:persistent_shopping_cart/persistent_shopping_cart.dart';
 import 'package:shopping_app/core/initial_binding/initial_binding.dart';
 import 'package:shopping_app/core/utils/routes/app_pages.dart';
 import 'package:shopping_app/core/utils/routes/app_routes.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // CHANGED: Open the package-managed Hive cart before controllers access it.
+  await PersistentShoppingCart().init();
   runApp(const MyApp());
 }
 

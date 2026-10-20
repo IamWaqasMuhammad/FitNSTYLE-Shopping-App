@@ -4,6 +4,11 @@ import 'package:shopping_app/feature/cart/controller/shopping_cart_controller.da
 class ShoppingCartBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ShoppingCartController>(()=>ShoppingCartController());
+    if (!Get.isRegistered<ShoppingCartController>()) {
+      Get.put<ShoppingCartController>(
+        ShoppingCartController(),
+        permanent: true,
+      );
+    }
   }
 }

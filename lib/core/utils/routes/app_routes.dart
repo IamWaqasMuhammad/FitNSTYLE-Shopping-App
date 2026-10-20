@@ -1,5 +1,4 @@
 class AppRoutes {
-
   AppRoutes._();
 
   static const String splash = '/';
@@ -19,4 +18,5 @@ class AppRoutes {
   static const String productDetail = '/product-Detail';
   static const String shoppingCart = '/shopping-cart';
   static const String addToCart = '/add-to-cart';
+  static const String wishlist = '/wishlist';
 }

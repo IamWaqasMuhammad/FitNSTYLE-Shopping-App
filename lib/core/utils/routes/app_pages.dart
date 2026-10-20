@@ -7,9 +7,10 @@ import 'package:shopping_app/feature/auth/view/login_view.dart';
 import 'package:shopping_app/feature/auth/view/register_view.dart';
 import 'package:shopping_app/feature/cart/binding/shopping_cart_binding.dart';
 import 'package:shopping_app/feature/cart/view/shopping_cart_view.dart';
-import 'package:shopping_app/feature/home/view/category_view.dart';
 import 'package:shopping_app/feature/dashboard/view/dashboard_view.dart';
+import 'package:shopping_app/feature/favourite/view/wishlist_view.dart';
 import 'package:shopping_app/feature/home/binding/home_binding.dart';
+import 'package:shopping_app/feature/home/view/category_view.dart';
 import 'package:shopping_app/feature/home/view/home_view.dart';
 import 'package:shopping_app/feature/notifications/binding/notifications_binding.dart';
 import 'package:shopping_app/feature/notifications/view/notifications_view.dart';
@@ -25,6 +26,7 @@ import 'package:shopping_app/feature/profile/binding/profile_binding.dart';
 import 'package:shopping_app/feature/profile/view/profile_view.dart';
 import 'package:shopping_app/feature/splash/binding/splash_binding.dart';
 import 'package:shopping_app/feature/splash/view/splash_view.dart';
+
 import '../../../feature/dashboard/binding/dashboard_binding.dart';
 import 'app_routes.dart';
 
@@ -125,6 +127,11 @@ class AppPages {
       name: AppRoutes.addToCart,
       page: () => const AddToCartView(),
       binding: AddToCartBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.wishlist,
+      page: () => const WishlistView(),
       transition: Transition.fadeIn,
     ),
   ];

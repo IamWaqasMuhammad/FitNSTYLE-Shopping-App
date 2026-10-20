@@ -7,7 +7,8 @@ import 'package:shopping_app/core/constants/app_colors.dart';
 import 'package:shopping_app/core/constants/app_sizes.dart';
 import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
-import 'package:shopping_app/core/utils/routes/app_routes.dart';
+import 'package:shopping_app/feature/cart/controller/shopping_cart_controller.dart';
+import 'package:shopping_app/feature/favourite/controller/wishlist_controller.dart';
 
 class ProductDetailView extends StatelessWidget {
   const ProductDetailView({super.key});
@@ -15,6 +16,8 @@ class ProductDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic>? product = Get.arguments;
+    final cartController = Get.find<ShoppingCartController>();
+    final wishlistController = Get.find<WishlistController>();
 
     if (product == null) {
       return const Scaffold(
@@ -41,16 +44,24 @@ class ProductDetailView extends StatelessWidget {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: AppColors.lightGrey,
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(32.r)),
+                      borderRadius: BorderRadius.vertical(
+                        bottom: Radius.circular(32.r),
+                      ),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(32.r)),
+                      borderRadius: BorderRadius.vertical(
+                        bottom: Radius.circular(32.r),
+                      ),
                       child: Image.network(
                         product['image'] ?? '',
                         fit: BoxFit.cover,
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
-                          return Center(child: CircularProgressIndicator(color: AppColors.primary));
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.primary,
+                            ),
+                          );
                         },
                         errorBuilder: (context, error, stackTrace) => Icon(
                           Icons.image_not_supported_outlined,
@@ -87,30 +98,51 @@ class ProductDetailView extends StatelessWidget {
                         Expanded(
                           child: Text(
                             product['title'] ?? 'Product Title',
-                            style: AppTextStyles.headingLarge.copyWith(fontSize: 22.sp, fontWeight: FontWeight.bold),
+                            style: AppTextStyles.headingLarge.copyWith(
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         // 🟢 CHANGED: Added dynamic badge indicator matching product items catalog subratings properties
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                          decoration: BoxDecoration(color: Colors.amber.shade50, borderRadius: BorderRadius.circular(12.r)),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                            vertical: 4.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.shade50,
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
                           child: Row(
                             children: [
-                              const Icon(Icons.star, color: Colors.amber, size: 16),
+                              const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 16,
+                              ),
                               4.width,
                               Text(
                                 '${product['rating'] ?? 0.0}',
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp, color: Colors.amber.shade900),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.sp,
+                                  color: Colors.amber.shade900,
+                                ),
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                     12.height,
                     Text(
                       product['price'] ?? '\$0.00',
-                      style: AppTextStyles.headingMedium.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 20.sp),
+                      style: AppTextStyles.headingMedium.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.sp,
+                      ),
                     ),
                     20.height,
 
@@ -118,7 +150,9 @@ class ProductDetailView extends StatelessWidget {
                     if (sizeList.isNotEmpty) ...[
                       Text(
                         'Select Size',
-                        style: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w600),
+                        style: AppTextStyles.bodyLarge.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       12.height,
                       SizedBox(
@@ -127,7 +161,8 @@ class ProductDetailView extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           physics: const BouncingScrollPhysics(),
                           itemCount: sizeList.length,
-                          separatorBuilder: (context, index) => SizedBox(width: 10.w),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: 10.w),
                           itemBuilder: (context, index) {
                             final sizeLabel = sizeList[index].toString();
 
@@ -137,15 +172,23 @@ class ProductDetailView extends StatelessWidget {
                             return Container(
                               padding: EdgeInsets.symmetric(horizontal: 16.w),
                               decoration: BoxDecoration(
-                                color: isSelectedPlaceholder ? AppColors.textPrimary : AppColors.lightGrey,
+                                color: isSelectedPlaceholder
+                                    ? AppColors.textPrimary
+                                    : AppColors.lightGrey,
                                 borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(color: isSelectedPlaceholder ? AppColors.textPrimary : Colors.transparent),
+                                border: Border.all(
+                                  color: isSelectedPlaceholder
+                                      ? AppColors.textPrimary
+                                      : Colors.transparent,
+                                ),
                               ),
                               child: Center(
                                 child: Text(
                                   sizeLabel,
                                   style: AppTextStyles.bodyMedium.copyWith(
-                                    color: isSelectedPlaceholder ? AppColors.surface : AppColors.textPrimary,
+                                    color: isSelectedPlaceholder
+                                        ? AppColors.surface
+                                        : AppColors.textPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -156,16 +199,22 @@ class ProductDetailView extends StatelessWidget {
                       ),
                       20.height,
                     ],
-                    // 🟢 CHANGED AREA END
 
+                    // 🟢 CHANGED AREA END
                     Text(
                       'Description',
-                      style: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w600),
+                      style: AppTextStyles.bodyLarge.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     10.height,
                     Text(
-                      product['description'] ?? 'No Description available for this item.',
-                      style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary, height: 1.5),
+                      product['description'] ??
+                          'No Description available for this item.',
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.textSecondary,
+                        height: 1.5,
+                      ),
                     ),
                     70.height,
                     Row(
@@ -177,24 +226,34 @@ class ProductDetailView extends StatelessWidget {
                               CupertinoIcons.cart,
                               color: AppColors.white,
                             ),
-                            onTap: () {Get.toNamed(AppRoutes.addToCart);},
+                            // CHANGED: Add the selected product to the persistent cart.
+                            onTap: () => cartController.addProduct(product),
                             backgroundColor: AppColors.primary,
                             textColor: AppColors.white,
                           ),
                         ),
                         5.width,
-                        CustomButton(
-                          onTap: () {},
-                          text: 'Wishlist',
-                          width: 150.w,
-                          icon: Icon(
-                            CupertinoIcons.heart,
-                            color: AppColors.primary,
-                          ),
-                          isSecondary: true,
-                          isOutlined: true,
-                          borderRadius: AppSizes.radiusCircular,
-                        ),
+                        Obx(() {
+                          final isWishlisted = wishlistController.isWishlisted(
+                            product,
+                          );
+                          return CustomButton(
+                            // CHANGED: Wishlist action now adds or removes this product.
+                            onTap: () =>
+                                wishlistController.toggleProduct(product),
+                            text: isWishlisted ? 'Wishlisted' : 'Wishlist',
+                            width: 150.w,
+                            icon: Icon(
+                              isWishlisted
+                                  ? CupertinoIcons.heart_fill
+                                  : CupertinoIcons.heart,
+                              color: AppColors.primary,
+                            ),
+                            isSecondary: true,
+                            isOutlined: true,
+                            borderRadius: AppSizes.radiusCircular,
+                          );
+                        }),
                       ],
                     ),
                   ],
