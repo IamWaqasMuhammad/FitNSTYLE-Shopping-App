@@ -77,7 +77,7 @@ class HomeView extends StatelessWidget {
 
               // ==================== SEARCH BAR SECTION ====================
               CustomSearchBar(
-                hintText: 'Search',
+                hintText: "Explore what's new and trending today",
                 prefixIcon: Icon(
                   CupertinoIcons.search,
                   color: AppColors.textLight,

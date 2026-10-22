@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:shopping_app/feature/add_to_cart/binding/add_to_cart_binding.dart';
-import 'package:shopping_app/feature/add_to_cart/view/add_to_cart_view.dart';
 import 'package:shopping_app/feature/auth/binding/login_binding.dart';
 import 'package:shopping_app/feature/auth/binding/register_binding.dart';
 import 'package:shopping_app/feature/auth/view/login_view.dart';
@@ -10,7 +8,6 @@ import 'package:shopping_app/feature/cart/view/shopping_cart_view.dart';
 import 'package:shopping_app/feature/dashboard/view/dashboard_view.dart';
 import 'package:shopping_app/feature/favourite/view/wishlist_view.dart';
 import 'package:shopping_app/feature/home/binding/home_binding.dart';
-import 'package:shopping_app/feature/home/view/category_view.dart';
 import 'package:shopping_app/feature/home/view/home_view.dart';
 import 'package:shopping_app/feature/notifications/binding/notifications_binding.dart';
 import 'package:shopping_app/feature/notifications/view/notifications_view.dart';
@@ -23,10 +20,12 @@ import 'package:shopping_app/feature/orders/view/returned_orders_view.dart';
 import 'package:shopping_app/feature/orders/view/shippped_orders_view.dart';
 import 'package:shopping_app/feature/product/view/product_detail_view.dart';
 import 'package:shopping_app/feature/profile/binding/profile_binding.dart';
+import 'package:shopping_app/feature/profile/view/edit_profile_view.dart';
 import 'package:shopping_app/feature/profile/view/profile_view.dart';
 import 'package:shopping_app/feature/splash/binding/splash_binding.dart';
 import 'package:shopping_app/feature/splash/view/splash_view.dart';
 
+import '../../../feature/category/view/category_view.dart';
 import '../../../feature/dashboard/binding/dashboard_binding.dart';
 import 'app_routes.dart';
 
@@ -124,9 +123,9 @@ class AppPages {
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: AppRoutes.addToCart,
-      page: () => const AddToCartView(),
-      binding: AddToCartBinding(),
+      name: AppRoutes.editProfile,
+      page: () => const EditProfileView(),
+      binding: ProfileBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(

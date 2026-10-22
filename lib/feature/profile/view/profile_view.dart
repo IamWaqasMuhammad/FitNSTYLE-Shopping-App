@@ -62,7 +62,7 @@ class ProfileView extends StatelessWidget {
                     ],
                   ),
                   CustomButton(
-                    onTap: () {},
+                    onTap: () {Get.toNamed(AppRoutes.editProfile);},
                     text: 'Edit',
                     height: 30.h,
                     width: 70.w,
