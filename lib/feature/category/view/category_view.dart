@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shopping_app/core/common_widgets/custom_button.dart';
 import 'package:shopping_app/core/common_widgets/custom_list_view.dart';
+import 'package:shopping_app/core/common_widgets/custom_search_bar.dart';
 import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
 import 'package:shopping_app/core/utils/routes/app_routes.dart';
@@ -11,7 +12,7 @@ import 'package:shopping_app/feature/home/controller/home_controller.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_sizes.dart';
-import '../widgets/category_list_item.dart';
+import '../../home/widgets/category_list_item.dart';
 
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key});
@@ -25,23 +26,41 @@ class CategoryView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(AppSizes.md),
-            child: Column(
+            child:
+            Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomButton(
-                  onTap: () {
-                    Get.offNamed(AppRoutes.dashboard);
-                  },
-                  height: 40.w,
-                  width: 40.w,
-                  icon: Icon(CupertinoIcons.back),
-                  backgroundColor: AppColors.lightGrey,
-                  isSecondary: true,
-                  borderRadius: AppSizes.radiusCircular,
+                Row(
+                  children: [
+                    CustomButton(
+                      onTap: () {
+                        Get.offNamed(AppRoutes.dashboard);
+                      },
+                      height: 40.w,
+                      width: 40.w,
+                      icon: const Icon(CupertinoIcons.back),
+                      backgroundColor: AppColors.lightGrey,
+                      isSecondary: true,
+                      borderRadius: AppSizes.radiusCircular,
+                    ),
+                    10.width,
+                    Expanded(
+                      child: CustomSearchBar(
+                        hintText: 'What you looking for today?',
+                        prefixIcon: const Icon(
+                          CupertinoIcons.search,
+                          color: AppColors.textLight,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 25.height,
-                Text('Shop by Categories', style: AppTextStyles.headingLarge),
+                Text(
+                  'Shop by Categories',
+                  style: AppTextStyles.headingLarge,
+                ),
                 20.height,
 
                 CustomListView(
@@ -52,6 +71,7 @@ class CategoryView extends StatelessWidget {
                   itemCount: controller.categories.length,
                   itemBuilder: (context, index) {
                     final category = controller.categories[index];
+
                     return CategoryListItem(
                       title: category['name']!,
                       image: category['image']!,
@@ -64,7 +84,8 @@ class CategoryView extends StatelessWidget {
                   },
                 ),
               ],
-            ),
+            )
+
           ),
         ),
       ),

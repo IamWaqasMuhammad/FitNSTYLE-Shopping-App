@@ -8,7 +8,6 @@ import 'package:shopping_app/core/utils/routes/app_routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // CHANGED: Open the package-managed Hive cart before controllers access it.
   await PersistentShoppingCart().init();
   runApp(const MyApp());
 }
