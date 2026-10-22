@@ -22,7 +22,7 @@ class LoadingOverlay extends StatelessWidget {
             Text(
               'Loading ...',
               style: TextStyle(
-                color: Colors.black87,
+                color: AppColors.white,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
               ),
