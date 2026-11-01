@@ -19,4 +19,10 @@ class AppRoutes {
   static const String shoppingCart = '/shopping-cart';
   static const String editProfile = '/edit-profile';
   static const String wishlist = '/wishlist';
+  static const String helpSupport = '/help-support';
+  static const String checkout = '/checkout';
+  static const String paymentMethod = '/payment-method';
+  static const String settings = '/settings';
+  static const String about = '/about';
+  static const search = '/search';
 }
