@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
 import '../../../core/constants/app_colors.dart'; // Apne custom path ke mutabiq adjust karein
 
 class LoadingOverlay extends StatelessWidget {
-  const LoadingOverlay({super.key});
+  final String? loadingMessage;
+  const LoadingOverlay({super.key,this.loadingMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,10 @@ class LoadingOverlay extends StatelessWidget {
             ),
             15.height,
             Text(
-              'Loading ...',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-              ),
+              loadingMessage??'Loading ...',
+              style: AppTextStyles.headingSmall.copyWith(
+                color: AppColors.white
+              )
             ),
           ],
         ),

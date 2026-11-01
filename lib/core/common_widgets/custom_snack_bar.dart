@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:shopping_app/core/constants/app_colors.dart';
 import 'package:shopping_app/core/constants/app_text_styles.dart';
 
-enum CustomSnackBarType { success, error, info }
+import '../utils/enums/snack_bar_type_enum.dart';
+
 
 class CustomSnackBar extends StatelessWidget {
   final String title;

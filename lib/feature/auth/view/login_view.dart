@@ -80,13 +80,11 @@ class LoginView extends StatelessWidget {
                 ),
 
                 40.height,
-                Obx(
-                  () => CustomButton(
+                 CustomButton(
                     text: 'Login',
-                    isLoading: controller.isLoggingIn.value,
+                    isLoading: false,
                     onTap: () => controller
                         .loginUser(),
-                  ),
                 ),
                 10.height,
 
