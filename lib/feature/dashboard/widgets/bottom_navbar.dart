@@ -20,18 +20,18 @@ class CustomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     // 1. Unselected icons ki list
     const unselectedIcons = [
-      Icons.home_outlined,
-      Icons.notifications_none_rounded,
+      CupertinoIcons.home,
+      CupertinoIcons.bell,
       Icons.format_list_bulleted_outlined,
       CupertinoIcons.person,
     ];
 
     // 2. Selected/Active icons ki list
     const selectedIcons = [
-      Icons.home,
-      Icons.notifications_rounded,
+      Icons.home_filled,
+      CupertinoIcons.bell_fill,
       CupertinoIcons.square_list,
-      Icons.person,
+      CupertinoIcons.person_fill,
     ];
 
     return Padding(

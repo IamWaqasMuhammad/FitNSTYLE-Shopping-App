@@ -9,16 +9,29 @@ class CustomSearchBar extends StatelessWidget {
   final TextEditingController? searchController;
   final String? Function(String?)? searchValidator;
   final double? radius;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
+  final bool autofocus;
 
-  const CustomSearchBar({
-    super.key,
-    required this.hintText,
-    this.keyboardType = TextInputType.text,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.searchController,
-    this.searchValidator,
-    this.radius
+  const CustomSearchBar(
+
+  {
+
+  super
+
+      .
+
+  key,
+  required this.hintText,
+  this.keyboardType = TextInputType.text,
+  this.prefixIcon,
+  this.suffixIcon,
+  this.searchController,
+  this.searchValidator,
+  this.radius,
+  this.focusNode,
+  this.controller,
+    this.autofocus = false,
   });
 
   @override

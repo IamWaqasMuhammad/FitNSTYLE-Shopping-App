@@ -280,13 +280,26 @@ class ShoppingCartView extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Text('Subtotal', style: AppTextStyles.semiBold),
-          Text(
-            _formatPrice(controller.subtotal),
-            style: AppTextStyles.semiBold.copyWith(color: AppColors.primary),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Subtotal', style: AppTextStyles.semiBold),
+              Text(
+                _formatPrice(controller.subtotal),
+                style: AppTextStyles.semiBold.copyWith(
+                  color: AppColors.primary,
+                ),
+              ),
+            ],
+          ),
+          10.height,
+          CustomButton(
+            onTap: () {
+              Get.toNamed(AppRoutes.checkout);
+            },
+            text: 'Checkout',
           ),
         ],
       ),

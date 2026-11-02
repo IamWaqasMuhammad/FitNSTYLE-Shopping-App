@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,6 +7,7 @@ import 'package:shopping_app/core/common_widgets/section_header.dart';
 import 'package:shopping_app/core/constants/app_colors.dart';
 import 'package:shopping_app/core/constants/app_icons_assets.dart';
 import 'package:shopping_app/core/constants/app_sizes.dart';
+import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
 import 'package:shopping_app/feature/home/controller/home_controller.dart';
 
@@ -33,55 +33,76 @@ class HomeView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // ==================== APP BAR SECTION ====================
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+              // ==================== IMPROVED APP BAR SECTION ====================
+
+
+              Stack(
                 children: [
-                  CircleAvatar(
-                    backgroundColor: AppColors.primary,
-                    child: Icon(Icons.person, color: AppColors.surface),
-                  ),
-                  Obx(
-                    () => Container(
-                      height: 35.h,
-                      padding: EdgeInsets.symmetric(horizontal: 5.w),
-                      decoration: BoxDecoration(
-                        color: AppColors.lightGrey,
-                        borderRadius: BorderRadius.circular(AppSizes.radiusLG),
+                  // CHANGED: Filter takes only the space it needs.
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 125.w),
+                    height: 40.h,
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
+                    decoration: BoxDecoration(
+                      color: AppColors.lightGrey,
+                      borderRadius: BorderRadius.circular(AppSizes.radiusLG),
+                    ),
+                    child: Obx(
+                          () => CustomPopupMenu(
+                        label: controller.selectedMenuCategory.value,
+                        items: controller.menuCategoryList,
+                        selectedItem: controller.selectedMenuCategory.value,
+                        onSelected: controller.changeMenu,
                       ),
-                      child: Center(
-                        child: CustomPopupMenu(
-                          label: controller.selectedMenuCategory.value,
-                          items: controller.menuCategoryList,
-                          selectedItem: controller.selectedMenuCategory.value,
-                          onSelected: controller.changeMenu,
+                    ),
+                  ),
+
+                  // CHANGED: Title uses remaining space.
+                  Center(
+                      child: Text(
+                        'FitNSTYLE',
+                        maxLines: 1,
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.textPrimary,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
+
                   ),
-                  CustomButton(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.shoppingCart);
-                    },
-                    icon: Image.asset(
-                      AppIconsAssets.shoppingBagIcon,
-                      height: 20.h,
-                      width: 20.w,
+
+                  // CHANGED: Cart button keeps fixed dimensions.
+                  Align(
+                    alignment: AlignmentGeometry.topRight,
+                    child: CustomButton(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.shoppingCart);
+                      },
+                      icon: Image.asset(
+                        AppIconsAssets.shoppingBagIcon,
+                        height: 20.h,
+                        width: 20.w,
+                      ),
+                      height: 44.h,
+                      width: 44.w,
+                      borderRadius: AppSizes.radiusCircular,
                     ),
-                    height: 50.h,
-                    width: 50.w,
-                    borderRadius: AppSizes.radiusCircular,
                   ),
                 ],
               ),
+
+
               25.height,
 
               // ==================== SEARCH BAR SECTION ====================
+              // CHANGED: Navigate to SearchView on search field tap.
               CustomSearchBar(
-                hintText: "Explore what's new and trending today",
-                prefixIcon: Icon(
-                  CupertinoIcons.search,
-                  color: AppColors.textLight,
-                ),
+               // focusNode: searchController.searchFocusNode,
+               // controller: searchController.searchTextController,
+                autofocus: true, // CHANGED
+                hintText: 'Search products...',
+                prefixIcon: const Icon(Icons.search),
               ),
               25.height,
 

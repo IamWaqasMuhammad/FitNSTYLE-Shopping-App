@@ -11,6 +11,7 @@ class HomeController extends GetxController {
     'Women',
     'Kids',
     'Foot Wear',
+    'Accessories'
   ];
 
   void changeMenuCategory(String category) {
@@ -85,7 +86,7 @@ class HomeController extends GetxController {
         // Data update jo background filter list ko trigger karega
         selectedMenuCategory.value = category;
       },
-      loadingWidget: const LoadingOverlay(), // Humara custom loading indicator widget
+      loadingWidget: const LoadingOverlay(loadingMessage: 'Loading Products ...',), // Humara custom loading indicator widget
     );
   }
 

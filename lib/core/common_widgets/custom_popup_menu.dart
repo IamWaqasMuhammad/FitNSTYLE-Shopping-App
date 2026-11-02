@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shopping_app/core/constants/app_sizes.dart';
 import 'package:shopping_app/feature/home/controller/home_controller.dart';
 
 import '../constants/app_colors.dart';
@@ -51,9 +52,7 @@ class CustomPopupMenu extends StatelessWidget {
         maxWidth: width ?? 200.w,
       ),
 
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14.r),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
 
       itemBuilder: (context) {
         return items.map((item) {
@@ -95,6 +94,7 @@ class CustomPopupMenu extends StatelessWidget {
             child: Text(
               selectedItem ?? label,
               style: AppTextStyles.semiBold.copyWith(
+                fontSize: AppSizes.md,
                 color: selectedItem != null
                     ? AppColors.primary
                     : AppColors.textPrimary,
@@ -106,7 +106,7 @@ class CustomPopupMenu extends StatelessWidget {
 
           // CHANGED: Obx arrow ko GetX state ke according rebuild karega
           Obx(
-                () => AnimatedRotation(
+            () => AnimatedRotation(
               turns: controller.isMenuOpen.value ? 0.5 : 0,
               duration: const Duration(milliseconds: 200),
               child: Icon(

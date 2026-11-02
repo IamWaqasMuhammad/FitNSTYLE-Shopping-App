@@ -8,11 +8,25 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 
 class ProfileController extends GetxController {
-
+  // 🟢 Active reactive string tracking current profile gender status identity
   final RxString gender = 'Male'.obs;
 
   void updateGender(String value) {
     gender.value = value;
+  }
+
+  // 🟢 NEW HELPER METHOD: View ke icon error ko handle karne aur dynamic scaling ke liye
+  IconData getGenderIcon(String currentGender) {
+    switch (currentGender) {
+      case 'Male':
+        return CupertinoIcons.person;
+      case 'Female':
+        return Icons.person_3_outlined;
+      case 'Prefer not to say':
+        return CupertinoIcons.person_crop_circle_badge_xmark; // Privacy-focused clear neutral identity indicator
+      default:
+        return CupertinoIcons.person;
+    }
   }
 
   void showGenderSelection({
@@ -39,7 +53,6 @@ class ProfileController extends GetxController {
                 style: AppTextStyles.headingLarge,
               ),
               16.height,
-
               ...['Male', 'Female', 'Prefer not to say'].map(
                     (gender) {
                   final isSelected = selectedGender == gender;
@@ -77,8 +90,6 @@ class ProfileController extends GetxController {
       isScrollControlled: true,
     );
   }
-
-
 
   final List<Map<String, dynamic>> profileOptions = [
     {

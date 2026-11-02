@@ -61,17 +61,13 @@ class CustomButton extends StatelessWidget {
     final Color buttonBackground = isOutlined
         ? Colors.transparent
         : backgroundColor ??
-        (isSecondary
-            ? Colors.transparent
-            : AppColors.primary);
+              (isSecondary ? Colors.transparent : AppColors.primary);
 
-    final Color buttonText = textColor ??
-        (isOutlined || isSecondary
-            ? AppColors.primary
-            : AppColors.white);
+    final Color buttonText =
+        textColor ??
+        (isOutlined || isSecondary ? AppColors.primary : AppColors.white);
 
-    final Color buttonBorder =
-        borderColor ?? AppColors.primary;
+    final Color buttonBorder = borderColor ?? AppColors.primary;
 
     final Color splashColor = isOutlined || isSecondary
         ? AppColors.primary.withValues(alpha: 0.12)
@@ -89,24 +85,20 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius),
 
           border: isOutlined
-              ? Border.all(
-            color: buttonBorder,
-            width: borderWidth,
-          )
+              ? Border.all(color: buttonBorder, width: borderWidth)
               : null,
 
-          boxShadow: (!isSecondary &&
-              !isOutlined &&
-              buttonBackground != Colors.transparent)
+          boxShadow:
+              (!isSecondary &&
+                  !isOutlined &&
+                  buttonBackground != Colors.transparent)
               ? [
-            BoxShadow(
-              color: buttonBackground.withValues(
-                alpha: 0.15,
-              ),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ]
+                  BoxShadow(
+                    color: buttonBackground.withValues(alpha: 0.15),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ]
               : null,
         ),
         child: InkWell(
@@ -117,44 +109,41 @@ class CustomButton extends StatelessWidget {
           child: Center(
             child: isLoading
                 ? SizedBox(
-              width: 24.w,
-              height: 24.w,
-              child: CircularProgressIndicator(
-                strokeWidth: 2.5,
-                valueColor:
-                AlwaysStoppedAnimation<Color>(
-                  buttonText,
-                ),
-              ),
-            )
-                : Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: hasText ? 16.w : 0,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (hasImage) ...[
-                    image!,
-                    if (hasText) SizedBox(width: 8.w),
-                  ],
-
-                  if (hasIcon && !hasImage) ...[
-                    icon!,
-                    if (hasText) SizedBox(width: 8.w),
-                  ],
-
-                  if (hasText)
-                    Text(
-                      text!,
-                      style: AppTextStyles.button.copyWith(
-                        color: buttonText,
-                      ),
+                    width: 24.w,
+                    height: 24.w,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.5,
+                      valueColor: AlwaysStoppedAnimation<Color>(buttonText),
                     ),
-                ],
-              ),
-            ),
+                  )
+                : Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: hasText ? 16.w : 0,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (hasImage) ...[
+                          image!,
+                          if (hasText) SizedBox(width: 8.w),
+                        ],
+
+                        if (hasIcon && !hasImage) ...[
+                          icon!,
+                          if (hasText) SizedBox(width: 8.w),
+                        ],
+
+                        if (hasText)
+                          Text(
+                            text!,
+                            style: AppTextStyles.button.copyWith(
+                              color: buttonText,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
           ),
         ),
       ),
