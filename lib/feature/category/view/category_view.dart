@@ -10,6 +10,7 @@ import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
 import 'package:shopping_app/core/utils/routes/app_routes.dart';
 import 'package:shopping_app/feature/home/controller/home_controller.dart';
 
+import '../../../core/common_widgets/categories_list_shimmer_loading.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_sizes.dart';
 import '../../home/widgets/category_list_item.dart';
@@ -25,67 +26,70 @@ class CategoryView extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(AppSizes.md),
-            child:
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    CustomButton(
-                      onTap: () {
-                        Get.offNamed(AppRoutes.dashboard);
-                      },
-                      height: 40.w,
-                      width: 40.w,
-                      icon: const Icon(CupertinoIcons.back),
-                      backgroundColor: AppColors.lightGrey,
-                      isSecondary: true,
-                      borderRadius: AppSizes.radiusCircular,
-                    ),
-                    10.width,
-                    Expanded(
-                      child: CustomSearchBar(
-                        hintText: 'What you looking for today?',
-                        prefixIcon: const Icon(
-                          CupertinoIcons.search,
-                          color: AppColors.textLight,
+              padding: EdgeInsets.all(AppSizes.md),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      CustomButton(
+                        onTap: () {
+                          Get.offNamed(AppRoutes.dashboard);
+                        },
+                        height: 40.w,
+                        width: 40.w,
+                        icon: const Icon(CupertinoIcons.back),
+                        backgroundColor: AppColors.lightGrey,
+                        isSecondary: true,
+                        borderRadius: AppSizes.radiusCircular,
+                      ),
+                      10.width,
+                      Expanded(
+                        child: CustomSearchBar(
+                          hintText: 'What you looking for today?',
+                          prefixIcon: const Icon(
+                            CupertinoIcons.search,
+                            color: AppColors.textLight,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                25.height,
-                Text(
-                  'Shop by Categories',
-                  style: AppTextStyles.headingLarge,
-                ),
-                20.height,
+                    ],
+                  ),
+                  25.height,
+                  Text(
+                    'Shop by Categories',
+                    style: AppTextStyles.headingLarge,
+                  ),
+                  20.height,
+                  Obx(() {
+                    if (controller.isCategoriesLoading.value) {
+                      return const CategoryListShimmerLoading(); // REPLACES WITH SHIMMER IF LOADING
+                    }
 
-                CustomListView(
-                  scrollDirection: Axis.vertical,
-                  separatorHeight: 12.h,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.categories.length,
-                  itemBuilder: (context, index) {
-                    final category = controller.categories[index];
+                    return CustomListView(
+                      scrollDirection: Axis.vertical,
+                      separatorHeight: 12.h,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.categories.length,
+                      itemBuilder: (context, index) {
+                        final category = controller.categories[index];
 
-                    return CategoryListItem(
-                      title: category['name']!,
-                      image: category['image']!,
-                      onTap: () {
-                        debugPrint(
-                          'Selected category: ${category['name']}',
+                        return CategoryListItem(
+                          title: category['name']!,
+                          image: category['image']!,
+                          onTap: () {
+                            debugPrint(
+                              'Selected category: ${category['name']}',
+                            );
+                          },
                         );
                       },
                     );
-                  },
-                ),
-              ],
-            )
-
+                  }),
+                ],
+              )
           ),
         ),
       ),

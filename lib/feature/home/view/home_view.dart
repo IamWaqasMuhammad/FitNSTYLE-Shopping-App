@@ -11,6 +11,7 @@ import 'package:shopping_app/core/constants/app_text_styles.dart';
 import 'package:shopping_app/core/utils/extensions/sized_box_extension.dart';
 import 'package:shopping_app/feature/home/controller/home_controller.dart';
 
+import '../../../core/common_widgets/categories_shimmer_loading.dart';
 import '../../../core/common_widgets/custom_list_view.dart';
 import '../../../core/common_widgets/custom_popup_menu.dart';
 import '../../../core/common_widgets/products_grid.dart';
@@ -33,13 +34,8 @@ class HomeView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // ==================== APP BAR SECTION ====================
-
-              // ==================== IMPROVED APP BAR SECTION ====================
-
-
               Stack(
                 children: [
-                  // CHANGED: Filter takes only the space it needs.
                   Container(
                     constraints: BoxConstraints(maxWidth: 125.w),
                     height: 40.h,
@@ -49,7 +45,7 @@ class HomeView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(AppSizes.radiusLG),
                     ),
                     child: Obx(
-                          () => CustomPopupMenu(
+                      () => CustomPopupMenu(
                         label: controller.selectedMenuCategory.value,
                         items: controller.menuCategoryList,
                         selectedItem: controller.selectedMenuCategory.value,
@@ -57,22 +53,17 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // CHANGED: Title uses remaining space.
                   Center(
-                      child: Text(
-                        'FitNSTYLE',
-                        maxLines: 1,
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.textPrimary,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    child: Text(
+                      'FitNSTYLE',
+                      maxLines: 1,
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.textPrimary,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
                       ),
-
+                    ),
                   ),
-
-                  // CHANGED: Cart button keeps fixed dimensions.
                   Align(
                     alignment: AlignmentGeometry.topRight,
                     child: CustomButton(
@@ -91,16 +82,11 @@ class HomeView extends StatelessWidget {
                   ),
                 ],
               ),
-
-
               25.height,
 
               // ==================== SEARCH BAR SECTION ====================
-              // CHANGED: Navigate to SearchView on search field tap.
               CustomSearchBar(
-               // focusNode: searchController.searchFocusNode,
-               // controller: searchController.searchTextController,
-                autofocus: true, // CHANGED
+                autofocus: true,
                 hintText: 'Search products...',
                 prefixIcon: const Icon(Icons.search),
               ),
@@ -116,39 +102,41 @@ class HomeView extends StatelessWidget {
               10.height,
               SizedBox(
                 height: 95.h,
-                child: CustomListView(
-                  scrollDirection: Axis.horizontal,
-                  separatorHeight: 12.h,
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: controller.categories.length > 6
-                      ? 6
-                      : controller.categories.length,
-                  itemBuilder: (context, index) {
-                    final category = controller.categories[index];
-                    return CategoryItem(
-                      title: category['name']!,
-                      image: category['image']!,
-                      onTap: () {
-                        debugPrint('Selected category: ${category['name']}');
-                      },
-                    );
-                  },
-                ),
+                child: Obx(() {
+                  if (controller.isCategoriesLoading.value) {
+                    return const CategoriesShimmerLoading(); // ADDED HERE
+                  }
+
+                  return CustomListView(
+                    scrollDirection: Axis.horizontal,
+                    separatorHeight: 12.h,
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: controller.categories.length > 6
+                        ? 6
+                        : controller.categories.length,
+                    itemBuilder: (context, index) {
+                      final category = controller.categories[index];
+                      return CategoryItem(
+                        title: category['name']!,
+                        image: category['image']!,
+                        onTap: () {
+                          debugPrint('Selected category: ${category['name']}');
+                        },
+                      );
+                    },
+                  );
+                }),
               ),
               25.height,
 
               // ==================== TOP SELLING (DYNAMIC FILTERED) ====================
-              SectionHeader(title: 'Top Selling', onSeeAllTap: () {}),
+              SectionHeader(title: 'Top Selling', onSeeAllTap: () {Get.toNamed(AppRoutes.topSelling);}),
               10.height,
 
-              // 🟢 CHANGED: Wrapped with Obx to observe top menu filter selections in real-time
               Obx(() {
-                // Filter strings match directly using lowercase references
                 final selectedTab = controller.selectedMenuCategory.value
                     .toLowerCase();
-
-                // Filtering main list according to selection indicator
                 final filteredList = controller.dummyProducts
                     .where(
                       (p) =>
@@ -158,6 +146,7 @@ class HomeView extends StatelessWidget {
                     .toList();
 
                 return ProductsGrid(
+                  isLoading: controller.isGridLoading.value,
                   products: filteredList,
                   maxItems: 2,
                   onProductTap: (index) {
@@ -168,7 +157,6 @@ class HomeView extends StatelessWidget {
                   },
                 );
               }),
-
               25.height,
 
               // ==================== NEW IN (DYNAMIC FILTERED) ====================
@@ -176,16 +164,13 @@ class HomeView extends StatelessWidget {
                 title: 'New In',
                 titleColor: AppColors.primary,
                 titleFontSize: 22.sp,
-                onSeeAllTap: () {},
+                onSeeAllTap: () {Get.toNamed(AppRoutes.newIn);},
               ),
               10.height,
 
-              // 🟢 CHANGED: Wrapped with Obx to dynamically update items layout
               Obx(() {
                 final selectedTab = controller.selectedMenuCategory.value
                     .toLowerCase();
-
-                // Reading identical lists filtering configurations
                 final filteredList = controller.dummyProducts
                     .where(
                       (p) =>
@@ -194,19 +179,21 @@ class HomeView extends StatelessWidget {
                     )
                     .toList();
 
+                final reversedList = filteredList.reversed.toList();
+
                 return ProductsGrid(
-                  // Show reverse array trends matching specific filter categories
-                  products: filteredList.reversed.toList(),
+                  isLoading: controller.isGridLoading.value,
+                  products: reversedList,
                   maxItems: 4,
                   onProductTap: (index) {
-                    final reversedItem = filteredList.reversed.toList()[index];
                     Get.toNamed(
                       AppRoutes.productDetail,
-                      arguments: reversedItem,
+                      arguments: reversedList[index],
                     );
                   },
                 );
               }),
+              25.height,
             ],
           ),
         ),

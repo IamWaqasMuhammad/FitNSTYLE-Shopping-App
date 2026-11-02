@@ -1,11 +1,14 @@
 import 'package:get/get.dart';
-import 'package:shopping_app/core/common_widgets/loading_overlay.dart';
 
 class HomeController extends GetxController {
 
   // ==================== POPUP MENU ====================
 
   final selectedMenuCategory = 'Men'.obs;
+  final isGridLoading = true.obs;
+  final isCategoriesLoading = true.obs;
+
+
   final List<String> menuCategoryList = [
     'Men',
     'Women',
@@ -73,25 +76,39 @@ class HomeController extends GetxController {
     },
   ];
 
-  // 🟢 CHANGED: Filter change hone par overlay loader chalane ki async logic
-  void changeMenu(String? category) async {
-    if (category == null) return;
 
-    // 1. GetX Overlay Trigger: Is se screen block ho jayegi aur loader show hoga
-    Get.showOverlay(
-      asyncFunction: () async {
-        // Mock network delay (E.g., 1.5 seconds tak load hoga data)
-        await Future.delayed(const Duration(milliseconds: 1500));
-
-        // Data update jo background filter list ko trigger karega
-        selectedMenuCategory.value = category;
-      },
-      loadingWidget: const LoadingOverlay(loadingMessage: 'Loading Products ...',), // Humara custom loading indicator widget
-    );
+  // 🔴 UPPER CASE DETAILED COMMENT:
+  // ADDED ONINIT LIFECYCLE METHOD TO TRIGGER MOCK ASYNC LOADING TIMEOUT UPON INITIAL BOOTSTRAPS.
+  // AFTER 2 SECONDS, IT SETS THE INITIALIZATION LOADING FLAG TO FALSE TO REVEAL PRODUCT CARDS.
+  @override
+  void onInit() {
+    super.onInit();
+    loadInitialData();
   }
 
 
+  void loadInitialData() async {
+    try {
+      isGridLoading.value = true;
+      isCategoriesLoading.value = true;
 
+      await Future.delayed(const Duration(milliseconds: 2000));
+    } finally {
+      isGridLoading.value = false;
+      isCategoriesLoading.value = false;
+    }
+  }
+
+  void changeMenu(String? category) async {
+    if (category == null) return;
+    try {
+      isGridLoading.value = true;
+      selectedMenuCategory.value = category;
+      await Future.delayed(const Duration(milliseconds: 1500));
+    } finally {
+      isGridLoading.value = false;
+    }
+  }
   // Dummy product List of top selling
   final List<Map<String, dynamic>> dummyProducts = [
     {
@@ -355,6 +372,5 @@ class HomeController extends GetxController {
       "isFavorite": false,
     },
   ];
-
 
 }
