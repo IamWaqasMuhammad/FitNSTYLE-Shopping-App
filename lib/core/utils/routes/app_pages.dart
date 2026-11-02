@@ -16,6 +16,8 @@ import 'package:shopping_app/feature/favourite/view/wishlist_view.dart';
 import 'package:shopping_app/feature/help_and_support/view/help_support_view.dart';
 import 'package:shopping_app/feature/home/binding/home_binding.dart';
 import 'package:shopping_app/feature/home/view/home_view.dart';
+import 'package:shopping_app/feature/new_in/binding/new_in_binding.dart';
+import 'package:shopping_app/feature/new_in/view/new_in_view.dart';
 import 'package:shopping_app/feature/notifications/binding/notifications_binding.dart';
 import 'package:shopping_app/feature/notifications/view/notifications_view.dart';
 import 'package:shopping_app/feature/orders/binding/order_binding.dart';
@@ -31,6 +33,9 @@ import 'package:shopping_app/feature/settings/binding/settings_binding.dart';
 import 'package:shopping_app/feature/settings/view/settings_view.dart';
 import 'package:shopping_app/feature/splash/binding/splash_binding.dart';
 import 'package:shopping_app/feature/splash/view/splash_view.dart';
+import 'package:shopping_app/feature/top_selling/binding/top_selling_binding.dart';
+import 'package:shopping_app/feature/top_selling/view/top_selling_view.dart';
+import '../../../feature/product/binding/product_binding.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -108,8 +113,9 @@ class AppPages {
     GetPage(
       name: AppRoutes.productDetail,
       page: () => const ProductDetailView(),
-      transition: Transition.fadeIn,
+      binding: ProductDetailBinding(), // Make sure this layer injects properly here
     ),
+
     GetPage(
       name: AppRoutes.shoppingCart,
       page: () => const ShoppingCartView(),
@@ -153,6 +159,18 @@ class AppPages {
     GetPage(
       name: AppRoutes.about,
       page: () => const AboutView(),
+      transition: Transition.fadeIn,
+    ),
+GetPage(
+      name: AppRoutes.topSelling,
+      page: () => const TopSellingView(),
+      binding: TopSellingBinding(),
+      transition: Transition.fadeIn,
+    ),
+GetPage(
+      name: AppRoutes.newIn,
+      page: () => const NewInView(),
+      binding: NewInBinding(),
       transition: Transition.fadeIn,
     ),
 

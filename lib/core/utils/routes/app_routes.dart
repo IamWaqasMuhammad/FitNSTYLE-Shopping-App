@@ -25,4 +25,6 @@ class AppRoutes {
   static const String settings = '/settings';
   static const String about = '/about';
   static const search = '/search';
+  static const topSelling = '/top-selling';
+  static const newIn = '/new-in';
 }
