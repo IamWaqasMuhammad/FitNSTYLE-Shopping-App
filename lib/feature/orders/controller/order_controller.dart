@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart'; // REQUIRED: For returning Widgets
 import 'package:get/get.dart';
+import 'package:shopping_app/feature/orders/widgets/placed_order_view.dart';
 import '../../../core/utils/routes/app_routes.dart';
-import '../view/cancelled_orders_view.dart';
-import '../view/delivered_orders_view.dart';
-import '../view/processing_orders_view.dart';
-import '../view/returned_orders_view.dart';
-import '../view/shippped_orders_view.dart';
+import '../widgets/delivered_order_view.dart';
+
+import '../widgets/pending_order_view.dart';
 
 
 class OrderController extends GetxController {
@@ -16,31 +15,23 @@ class OrderController extends GetxController {
     AppRoutes.processingOrders,
     AppRoutes.shippedOrders,
     AppRoutes.deliveredOrders,
-    AppRoutes.returnedOrders,
-    AppRoutes.cancelledOrders
   ];
 
   final List<String> tabsName = [
-    'Processing Orders',
-    'Shipped Orders',
+    'Placed Orders',
+    'Pending Orders',
     'Delivered Orders',
-    'Returned Orders',
-    'Cancelled Orders'
   ];
 
 
   Widget get activeOrderView {
     switch (selectedStatusTab.value) {
       case AppRoutes.processingOrders:
-        return const ProcessingOrdersView();
+        return const PlacedOrderView() ;
       case AppRoutes.shippedOrders:
-        return const ShippedOrdersView();
+        return const PendingOrderView();
       case AppRoutes.deliveredOrders:
-        return const DeliveredOrdersView();
-      case AppRoutes.returnedOrders:
-        return const ReturnedOrdersView();
-      case AppRoutes.cancelledOrders:
-        return const CancelledOrdersView();
+        return const DeliveredOrderView() ;
       default:
         return const Center(child: Text('View not found'));
     }
